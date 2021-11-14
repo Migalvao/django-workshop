@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+    <h1>{{school.name}}</h1>
+    <p>Price: {{school.price}}€</p>
+    <p>Location: {{school.location}}</p>
+    <p>Contact: {{school.phone_number}}</p>
+
+    <a href="/app/schools/">Home</a>
+
+
+    <p><b>Leave a comment!</b></p>
+
+    <form action="/app/schools/{{school.pk}}/" method="POST">
+        {% csrf_token %} {{form.as_p}}
+        <input type="submit" value="Submit">
+    </form>
+
+    <p><b>Comments:</b></p>
+
+    {% for c in comments %}
+
+    <div>
+        <p>{{c.author}} - {{c.datetime}}</p>
+        <textarea readonly>{{c.text}}</textarea>
+    </div>
+
+    {%empty %}
+    <p>No comments yet</p>
+    {% endfor %}
+
+</body>
+
+</html>
